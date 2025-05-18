@@ -1,2 +1,9 @@
-# cyber-noise-blaster
-Noise-based 2.4GHz jammer using ESP32 and NRF24L01 to disrupt Bluetooth, BLE, WiFi, and drone signals by hopping 125 channels.
+```
+   ____        _              _   _                     _             
+  / ___| _   _| |__  _ __ ___| |_| |_ ___ _ __ ___  ___| |_ ___  _ __ 
+  \___ \| | | | '_ \| '__/ _ \ __| __/ _ \ '__/ __|/ _ \ __/ _ \| '__|
+   ___) | |_| | |_) | | |  __/ |_| ||  __/ |  \__ \  __/ || (_) | |   
+  |____/ \__,_|_.__/|_|  \___|\__|\__\___|_|  |___/\___|\__\___/|_|   
+                                                                      
+            CYBER ⚡ NOISE ⚡ BLASTER — FULL 2.4GHz SIGNAL JAMMER
+```
