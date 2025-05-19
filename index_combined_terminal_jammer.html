@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Noise Blaster - Unified Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    body::before {
+      content: "";
+      background: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWs3cnRsdWNlampjemlkZWs3bzQxcGl6NWxsb21oOHljZXJyd21qeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lo5HLcAPFSgTZNTpAn/giphy.gif') no-repeat center center;
+      background-size: cover;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.15;
+      z-index: -1;
+    }
+    .wrapper {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .terminal {
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #0f0;
+      padding: 20px;
+      width: 100%;
+      height: 250px;
+      overflow-y: auto;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      background-color: #0f0;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>💥 Cyber Noise Blaster V1 💥</h1>
+    <h2>Unified Web-Based Jammer Terminal Demo</h2>
+    
+    <div class="terminal" id="terminal">
+      > Cyber Noise Blaster V1 Initialized...<br>
+    </div>
+    <div style="text-align:center;">
+      <button onclick="startJamming()">🚀 Start Jamming</button>
+      <button onclick="stopJamming()">🛑 Stop Jamming</button>
+      <button onclick="typeDemo()">🎬 Type Demo</button>
+      <button onclick="clearTerminal()">🧹 Clear</button>
+    </div>
+  </div>
+
+  <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2221/2221-preview.mp3" preload="auto"></audio>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const typeSound = document.getElementById("typeSound");
+
+    function printLine(text) {
+      const line = document.createElement("div");
+      line.textContent = "> " + text;
+      terminal.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+      typeSound.currentTime = 0;
+      typeSound.play();
+    }
+
+    function startJamming() {
+      printLine("Initiating BLE/WiFi jamming sequence...");
+      setTimeout(() => printLine("Channel hop: [42, 61, 17, 99]"), 600);
+      setTimeout(() => printLine("Payload flood initiated..."), 1200);
+      setTimeout(() => printLine("Radio TX power: HIGH"), 1800);
+      setTimeout(() => printLine("Jammer Status: ACTIVE ✅"), 2400);
+    }
+
+    function stopJamming() {
+      printLine("Sending kill signal...");
+      setTimeout(() => printLine("Disabling NRF interface..."), 600);
+      setTimeout(() => printLine("Shutting down BLE carrier..."), 1200);
+      setTimeout(() => printLine("Jammer Status: OFF 🛑"), 1800);
+    }
+
+    function typeDemo() {
+      const messages = [
+        "Initializing 💥Cyber-Noise-Blaster-V1—BLE/WiFi-Jamming-Suite 💥...",
+        "Connecting to NRF24...",
+        "Scanning BLE frequencies...🔍",
+        "Establishing root interface...✔",
+        "Jamming Sequence Started...⚠️",
+        "thehackspectre — command Console Ready..."
+      ];
+      let i = 0;
+      function typeLine() {
+        if (i < messages.length) {
+          printLine(messages[i]);
+          i++;
+          setTimeout(typeLine, 1000);
+        }
+      }
+      typeLine();
+    }
+
+    function clearTerminal() {
+      terminal.innerHTML = "> Cyber Noise Blaster V1 Initialized...<br>";
+    }
+  </script>
+</body>
+</html>
