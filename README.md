@@ -13,7 +13,7 @@
 ---
 
 
-https://<your-username>.github.io/<repository-name>/
+https://thehackspectre.github.io/cyber-noise-blaster/index_combined_terminal_jammer.html
 
 ---
 
