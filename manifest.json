@@ -1,0 +1,16 @@
+{
+  "name": "Cyber Noise Blaster V1",
+  "description": "ESP32 BLE Jamming Firmware",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "version": "1.0.0",
+      "parts": [
+        {
+          "path": "firmware.bin",
+          "offset": 4096
+        }
+      ]
+    }
+  ]
+}
