@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cyber Noise Blaster - Unified Demo</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/@serialport/web-serial-polyfill@1.0.0-beta.5/dist/index.js"></script>
   <style>
     body {
       margin: 0;
@@ -56,14 +57,15 @@
 <body>
   <div class="wrapper">
     <h1>💥 Cyber Noise Blaster V1 💥</h1>
-    <h2>Unified Web-Based Jammer Terminal Demo</h2>
+    <h2>Unified Web-Based Jammer Terminal</h2>
     
     <div class="terminal" id="terminal">
       > Cyber Noise Blaster V1 Initialized...<br>
     </div>
     <div style="text-align:center;">
-      <button onclick="startJamming()">🚀 Start Jamming</button>
-      <button onclick="stopJamming()">🛑 Stop Jamming</button>
+      <button id="connect">🔌 Connect to ESP32</button>
+      <button id="start" disabled>🚀 Start Jamming</button>
+      <button id="stop" disabled>🛑 Stop Jamming</button>
       <button onclick="typeDemo()">🎬 Type Demo</button>
       <button onclick="clearTerminal()">🧹 Clear</button>
     </div>
@@ -74,6 +76,7 @@
   <script>
     const terminal = document.getElementById("terminal");
     const typeSound = document.getElementById("typeSound");
+    let port, writer;
 
     function printLine(text) {
       const line = document.createElement("div");
@@ -84,19 +87,36 @@
       typeSound.play();
     }
 
+    async function connectESP() {
+      try {
+        port = await navigator.serial.requestPort();
+        await port.open({ baudRate: 115200 });
+        writer = port.writable.getWriter();
+        document.getElementById("start").disabled = false;
+        document.getElementById("stop").disabled = false;
+        printLine("✅ ESP32 Connected");
+      } catch (e) {
+        printLine("❌ Connection failed: " + e);
+      }
+    }
+
+    async function sendCommand(command) {
+      if (writer) {
+        await writer.write(new TextEncoder().encode(command + "\n"));
+        printLine("📤 Sent command: " + command);
+      } else {
+        printLine("❗ Not connected");
+      }
+    }
+
     function startJamming() {
-      printLine("Initiating BLE/WiFi jamming sequence...");
-      setTimeout(() => printLine("Channel hop: [42, 61, 17, 99]"), 600);
-      setTimeout(() => printLine("Payload flood initiated..."), 1200);
-      setTimeout(() => printLine("Radio TX power: HIGH"), 1800);
-      setTimeout(() => printLine("Jammer Status: ACTIVE ✅"), 2400);
+      sendCommand("start");
+      printLine("🟢 Starting jammer...");
     }
 
     function stopJamming() {
-      printLine("Sending kill signal...");
-      setTimeout(() => printLine("Disabling NRF interface..."), 600);
-      setTimeout(() => printLine("Shutting down BLE carrier..."), 1200);
-      setTimeout(() => printLine("Jammer Status: OFF 🛑"), 1800);
+      sendCommand("stop");
+      printLine("🔴 Stopping jammer...");
     }
 
     function typeDemo() {
@@ -122,6 +142,10 @@
     function clearTerminal() {
       terminal.innerHTML = "> Cyber Noise Blaster V1 Initialized...<br>";
     }
+
+    document.getElementById("connect").onclick = connectESP;
+    document.getElementById("start").onclick = startJamming;
+    document.getElementById("stop").onclick = stopJamming;
   </script>
 </body>
 </html>
