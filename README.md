@@ -11,9 +11,10 @@
 </p>
 
 ---
+HERE you can flash you eps module.
 
+https://thehackspectre.github.io/cyber-noise-blaster/flash1.html
 
-https://thehackspectre.github.io/cyber-noise-blaster/index_combined_terminal_jammer.html
 
 ---
 
@@ -23,7 +24,8 @@ The **Cyber Noise Blaster V1** is an open-source, hardware-based pentesting tool
 
 With flexible SPI support, you can run either a **single** or **dual** jamming setup by simply adjusting the wiring and modifying the code.
 
----
+here is web ui to control your jammer!
+--- https://thehackspectre.github.io/cyber-noise-blaster/index_combined_terminal_jammer.html
 
 **Cyber Noise Blaster V1** is a next-gen cyber-disruption device built on ESP32 + NRF24L01 modules. It leverages RF noise bursts and smart channel hopping to jam or confuse 2.4GHz-based communication systems, including:
 
