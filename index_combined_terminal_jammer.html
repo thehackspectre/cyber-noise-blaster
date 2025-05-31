@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cyber Noise Blaster - Unified Demo</title>
+  <title>Cyber Noise Blaster - Web Control</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <script type="module" src="https://unpkg.com/@serialport/web-serial-polyfill@1.0.0-beta.5/dist/index.js"></script>
   <style>
     body {
       margin: 0;
@@ -57,16 +56,16 @@
 <body>
   <div class="wrapper">
     <h1>💥 Cyber Noise Blaster V1 💥</h1>
-    <h2>Unified Web-Based Jammer Terminal</h2>
+    <h2>Web-Controlled BLE/WiFi Jammer Interface</h2>
     
     <div class="terminal" id="terminal">
       > Cyber Noise Blaster V1 Initialized...<br>
     </div>
     <div style="text-align:center;">
-      <button id="connect">🔌 Connect to ESP32</button>
-      <button id="start" disabled>🚀 Start Jamming</button>
-      <button id="stop" disabled>🛑 Stop Jamming</button>
-      <button onclick="typeDemo()">🎬 Type Demo</button>
+      <button id="connect">🔌 Connect</button>
+      <button id="start" disabled>🚀 Start</button>
+      <button id="stop" disabled>🛑 Stop</button>
+      <button onclick="typeDemo()">🎬 Demo</button>
       <button onclick="clearTerminal()">🧹 Clear</button>
     </div>
   </div>
@@ -94,7 +93,7 @@
         writer = port.writable.getWriter();
         document.getElementById("start").disabled = false;
         document.getElementById("stop").disabled = false;
-        printLine("✅ ESP32 Connected");
+        printLine("✅ Connected to ESP32");
       } catch (e) {
         printLine("❌ Connection failed: " + e);
       }
@@ -111,32 +110,30 @@
 
     function startJamming() {
       sendCommand("start");
-      printLine("🟢 Starting jammer...");
+      printLine("🟢 Jammer started");
     }
 
     function stopJamming() {
       sendCommand("stop");
-      printLine("🔴 Stopping jammer...");
+      printLine("🔴 Jammer stopped");
     }
 
     function typeDemo() {
       const messages = [
-        "Initializing 💥Cyber-Noise-Blaster-V1—BLE/WiFi-Jamming-Suite 💥...",
-        "Connecting to NRF24...",
-        "Scanning BLE frequencies...🔍",
-        "Establishing root interface...✔",
-        "Jamming Sequence Started...⚠️",
-        "thehackspectre — command Console Ready..."
+        "Cyber Noise Blaster Activated...",
+        "Scanning 2.4GHz spectrum...",
+        "Initializing NRF interfaces...",
+        "Ready for BLE/WiFi disruption...",
+        "Awaiting operator command..."
       ];
       let i = 0;
-      function typeLine() {
+      function next() {
         if (i < messages.length) {
-          printLine(messages[i]);
-          i++;
-          setTimeout(typeLine, 1000);
+          printLine(messages[i++]);
+          setTimeout(next, 1000);
         }
       }
-      typeLine();
+      next();
     }
 
     function clearTerminal() {
